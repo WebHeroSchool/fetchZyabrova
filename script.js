@@ -1,4 +1,4 @@
-let name = 'defunkt';
+let name = 'defunktpppp';
 let newUser;
 let href = document.location.href;
 const userAva = document.getElementById('avatar');
@@ -19,18 +19,18 @@ const requestUrl = function () {
 let apiLink = requestUrl();
 
 const renderCard = function (obj) {
-  if (obj[0] != undefined) {
-    userAva.src = obj.avatar_url;
-    userName.innerHTML = obj.name;
-    userLink.href = obj.html_url;
+  userAva.src = obj.avatar_url;
+  userLink.innerHTML = obj.login;
+  userLink.href = obj.html_url;
+  if (obj.bio != null) {
     userBio.innerHTML = obj.bio;
   } else {
-    console.log('Информация о пользователе недоступна.')
+    userBio.innerHTML = console.log('Информация о пользователе недоступна.')
   }
 }
 
 fetch(apiLink)
-    .then(res => { return res.json()})
-    .then(userData => renderCard(userData))
-    .catch(err => console.log(err));
-
+    .then(res => res.json())
+    .then(obj => newUser = Object.assign({}, obj))
+    .then(newUser => renderCard(newUser))
+    .catch(err => console.error(err))
